@@ -1,43 +1,69 @@
-/* Purchase links stay local until a verified checkout URL is configured. */
-'use strict';
-document.documentElement.classList.add('js');
-const menuButton = document.querySelector('.menu-toggle');
-const navigation = document.querySelector('#navigation');
-const desktop = window.matchMedia('(min-width: 1000px)');
-function closeMenu(returnFocus = false) {
-  navigation.classList.remove('is-open');
-  menuButton.setAttribute('aria-expanded', 'false');
-  menuButton.setAttribute('aria-label', 'Открыть меню');
-  if (returnFocus) menuButton.focus();
-}
-menuButton.addEventListener('click', () => {
-  const open = menuButton.getAttribute('aria-expanded') !== 'true';
-  navigation.classList.toggle('is-open', open);
-  menuButton.setAttribute('aria-expanded', String(open));
-  menuButton.setAttribute('aria-label', open ? 'Закрыть меню' : 'Открыть меню');
-});
-navigation.addEventListener('click', (event) => {
-  const link = event.target.closest('a');
-  if (!link) return;
-  closeMenu();
-  const destination = document.querySelector(link.hash);
-  if (destination) {
-    destination.setAttribute('tabindex', '-1');
-    destination.focus({ preventScroll: true });
-  }
-});
-document.addEventListener('keydown', (event) => {
-  if (event.key === 'Escape' && navigation.classList.contains('is-open')) closeMenu(true);
-});
-document.addEventListener('click', (event) => {
-  if (!event.target.closest('.header')) closeMenu();
-});
-desktop.addEventListener('change', () => closeMenu());
-// Native details/summary keeps FAQ usable with keyboard and without JavaScript.
-document.querySelector('[data-checkout]').addEventListener('click', (event) => {
-  event.preventDefault();
-  const note = document.querySelector('#payment-note');
-  note.textContent = 'Покупка пока недоступна: оплата еще не подключена. Порядок получения файлов будет указан до начала продаж.';
-  note.classList.add('is-active');
-  note.focus({ preventScroll: true });
-});
+# КЧП — Вентиляция чистых помещений · v2
+
+Одностраничный лендинг практического пособия Ришата Зарипова: PDF + Excel КЧП CHECK (.XLSM) + примеры проектных решений. HTML5, CSS3 и vanilla JavaScript. Без сборщика, библиотек, внешних шрифтов и сетевых зависимостей.
+
+## Файлы
+
+- `index.html` — тексты, 13 содержательных блоков, SEO, превью с резервными мокапами, FAQ и ссылки покупки.
+- `styles.css` — палитра в `:root`, адаптивная сетка, мокапы и состояния элементов.
+- `script.js` — мобильное меню, заглушка покупки, подстановка изображений и доступный lightbox. FAQ работает через нативные `details/summary` даже без JavaScript.
+- `README.md` — запуск и редактирование.
+
+## Локальный запуск
+
+Откройте `index.html` в современном браузере. Установка зависимостей не нужна. Для локального сервера при установленном Python выполните в папке проекта `python -m http.server 8000` и откройте `http://localhost:8000`.
+
+## GitHub Pages
+
+В репозитории откройте Settings → Pages. В разделе Build and deployment выберите Deploy from a branch, ветку `main` и папку `/(root)`, затем Save. После успешной публикации адрес будет `https://zrishat000.github.io/kchp-landing/`. Файлы используют относительные пути и работают в подпапке проекта. Само наличие файлов в main не включает Pages автоматически.
+
+## Цена, оплата и тексты
+
+Цена 2 990 ₽ указана в `index.html` в трех элементах `[data-price]`: первый экран, блок цены, финальная кнопка. При изменении замените все три значения и `offers.price` (2990) в JSON-LD. JavaScript цену не дублирует.
+
+Все ссылки покупки имеют `data-payment="yoomoney"` и `href="#buy"`. В блоке цены ссылка дополнительно помечена `data-checkout`: ее обработчик в `script.js` показывает сообщение о недоступности покупки. Реальная оплата и сбор данных не подключены.
+
+Чтобы подключить оплату позже: замените `href` у всех `[data-payment="yoomoney"]` на проверенную ссылку оформления покупки; удалите обработчик `[data-checkout]` из `script.js`; обновите `#payment-note`, `noscript` и ответ FAQ о получении файлов. Не размещайте секретные ключи в статических файлах. Выдача файлов и проверка платежей должны обеспечиваться платежной системой или отдельным сервисом, а не этим лендингом.
+
+Основные тексты меняются непосредственно в `index.html`. Там же находятся title, description и Open Graph. КЧП CHECK использует формат **.XLSM**: для кнопки «Проверить расчет» на VBA требуется разрешить макросы в Excel. Формулы и данные доступны для просмотра и ручной проверки. Совместимость со всеми версиями Excel не обещается. Перед началом продаж уточните поддерживаемые версии, условия использования, способ и сроки выдачи файлов.
+
+Реальные изображения пока не предоставлены. В hero и CHECK сохранены подписанные CSS-мокапы, в превью — технические заглушки. Отзывы, партнеры, нормативные ссылки и неподтвержденные показатели не добавлены.
+
+## Проверка перед публикацией
+
+Проверьте страницу на ширинах 320, 375, 768, 1024 и 1440 px, отсутствие горизонтальной прокрутки, открытие меню, закрытие по ссылке и Escape, FAQ мышью и клавиатурой, якоря и заглушку покупки. Учтен `prefers-reduced-motion`, есть видимый фокус и ссылка перехода к основному содержимому. Основное содержимое и FAQ доступны без JavaScript.
+
+## Структура v2
+
+Hero → что вы сможете сделать → превью материалов → КЧП CHECK → шесть направлений пособия → рабочий алгоритм → состав комплекта → три группы аудитории → честные ограничения → автор → цена → семь вопросов FAQ → финальная кнопка. Стиль и основа v1 сохранены; блок семи проблем удален.
+
+## Папка assets и реальные изображения
+
+Добавьте вручную в папку `assets/` следующие **настоящие** WebP-файлы с точными именами (регистр важен):
+
+| Файл | Где используется |
+| --- | --- |
+| `cover.webp` | Крупная обложка в hero |
+| `check.webp` | Мини-превью в hero и основной блок CHECK |
+| `project-example.webp` | Фрагмент проектного решения в hero |
+| `page-operating-room.webp` | Превью «Операционная» |
+| `page-pit.webp` | Превью «Палата / ПИТ» |
+| `page-ahu.webp` | Превью «Приточная установка КЧП» |
+| `og-cover.webp` | Необязательное изображение для социальных сетей |
+
+Папка поставляется с `.gitkeep`. Пустые или выдуманные WebP не создаются. Не переименовывайте JPG/PDF в WebP: сохраните изображения в нужном формате. Для страниц удобно вертикальное соотношение 3:4; изображения не обрезаются благодаря `object-fit: contain`. Используйте читаемые, оптимизированные экспорты без конфиденциальных данных.
+
+Ссылки и alt уже находятся в `index.html`. Достаточно загрузить изображения по указанным путям: `script.js` покажет их после успешной загрузки. Отсутствующий или поврежденный файл оставляет заглушку, без сломанной картинки и потери макета. Пока файлов нет, локальный сервер может сообщать 404 для этих путей — это ожидаемо.
+
+После добавления настоящих страниц обновите пояснение `.preview-note` и соответствующий ответ FAQ. После добавления `og-cover.webp` раскомментируйте готовый `og:image` в head. Сейчас он намеренно закомментирован, чтобы социальные сети не получали несуществующее изображение. Canonical, og:url, Product/Offer и Person уже настроены на адрес GitHub Pages. Рейтингов, отзывов и статуса наличия в JSON-LD нет.
+
+## Lightbox и базовый режим
+
+При включенном JavaScript кнопки превью открывают нативный модальный `dialog`: изображение увеличивается, а при его отсутствии показывается подписанная заглушка. Закрытие — кнопкой, Escape или кликом на свободную область вне изображения. Фокус удерживается в модальном окне и возвращается на кнопку превью при закрытии.
+
+Без JavaScript доступны тексты, навигация, цена, FAQ через `details/summary` и резервные макеты. Кнопки увеличения отключены; оплата остается недоступной. Ничего не скачивается и не оплачивается автоматически.
+
+## Проверка v2
+
+Проверяйте также отсутствующие и поврежденные изображения, подстановку настоящих файлов, lightbox с мышью и клавиатурой, возврат фокуса, ссылки на внешние страницы и локальные якоря. Реальная оплата в v2 не подключена.
+
