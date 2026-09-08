@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Вентиляция чистых помещений — практическое пособие для проектировщика ОВиК</title>
+  <meta name="description" content="Практическое пособие по вентиляции медицинских чистых помещений: расчеты, ламинарные зоны, вытяжка, баланс, фильтрация, автоматика и Excel КЧП CHECK.">
+  <meta property="og:title" content="Вентиляция чистых помещений — практическое пособие для проектировщика ОВиК">
+  <meta property="og:description" content="Практическое пособие по вентиляции медицинских чистых помещений: расчеты, ламинарные зоны, вытяжка, баланс, фильтрация, автоматика и Excel КЧП CHECK.">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="ru_RU">
+  <meta name="theme-color" content="#101e32">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='8' fill='%23101e32'/%3E%3Cpath d='M10 12h20M10 20h16M10 28h20' stroke='%2376adff' stroke-width='3'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="styles.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#main">Перейти к содержанию</a>
+<header class="header">
+  <div class="container header-row">
+    <a class="brand" href="#home" aria-label="КЧП — на главную"><span class="brand-mark" aria-hidden="true">≋</span> КЧП<span class="brand-caption">ИНЖЕНЕРНАЯ ПРАКТИКА</span></a>
+    <button class="menu-toggle" type="button" aria-controls="navigation" aria-expanded="false" aria-label="Открыть меню"><span></span><span></span></button>
+    <nav id="navigation" aria-label="Основная навигация"><a href="#inside">О пособии</a><a href="#check">КЧП CHECK</a><a href="#author">Автор</a><a href="#faq">Вопросы</a><a class="nav-buy" href="#buy" data-payment="yoomoney">Получить комплект <span aria-hidden="true">↗</span></a></nav>
+  </div>
+</header>
+<main id="main">
+  <section id="home" class="hero">
+    <div class="container hero-grid">
+      <div class="hero-copy"><p class="eyebrow"><span class="dot"></span> ДЛЯ ПРОЕКТИРОВЩИКОВ ОВиК</p>
+        <h1>Вентиляция<br>чистых помещений<br><span>без догадок</span></h1>
+        <p class="lead">Практическое пособие для проектировщика ОВиК: от исходных данных и расчета воздухообмена до готовых решений, примеров и проверки в КЧП CHECK.</p>
+        <p class="formats">PDF + Excel CHECK + примеры проектных решений</p>
+        <div class="hero-purchase"><a class="button" href="#buy" data-payment="yoomoney">Получить комплект <span aria-hidden="true">↗</span></a><span class="hero-price" data-price>2 990 ₽</span></div>
+        <a class="text-link" href="#inside">Посмотреть, что внутри <span aria-hidden="true">↓</span></a>
+      </div>
+      <figure class="product-visual" aria-label="Условный макет комплекта: обложка пособия, Excel CHECK и фрагмент чертежа">
+        <div class="drawing" aria-hidden="true"><span>ОВ / СХЕМА ВОЗДУХООБМЕНА</span><div class="room"><i class="supply"></i><b>↓ ↓ ↓</b><i class="zone"></i><em>↑</em></div><small>УСЛОВНАЯ СХЕМА · БЕЗ МАСШТАБА</small></div>
+        <div class="book"><div class="book-top">Ришат Зарипов <span>ОВиК</span></div><div class="book-title">Вентиляция<br>чистых<br>помещений</div><p>Практическое пособие<br>для проектировщика</p><div class="book-diagram" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></div><div class="book-bottom">ОТ ИСХОДНЫХ ДАННЫХ<br>ДО ПРОЕКТНОГО РЕШЕНИЯ <b>2026</b></div></div>
+        <div class="mini-check"><div><span class="excel-icon">X</span><strong>КЧП CHECK</strong><span class="file-type">.XLSX</span></div><p>Контроль расчета помещения</p><div class="mini-row"><span>Приток / вытяжка</span><span>— / —</span></div><div class="mini-row"><span>Баланс воздуха</span><span>—</span></div><span class="mini-status">○ Ожидает исходных данных</span></div>
+        <figcaption>Макеты материалов. Не скриншоты готовых файлов.</figcaption>
+      </figure>
+    </div>
+    <div class="container hero-bottom"><span>01 / ИСХОДНЫЕ ДАННЫЕ</span><span>02 / РАСЧЕТ И ПРОВЕРКА</span><span>03 / ПРОЕКТНОЕ РЕШЕНИЕ</span></div>
+  </section>
+  <section class="section" aria-labelledby="problems-title"><div class="container">
+    <p class="eyebrow">01 / ЗАДАЧИ ПРОЕКТИРОВЩИКА</p><h2 id="problems-title">Чистые помещения сложно<br>проектировать не из-за формул</h2>
+    <div class="problem-grid">
+      <article><span>01</span><h3>Какой расход принять?</h3><p>Непонятно, от каких исходных данных отталкиваться.</p></article>
+      <article><span>02</span><h3>Какой режим выбрать?</h3><p>Путают ламинарный и турбулентный режим.</p></article>
+      <article><span>03</span><h3>Как считать ламинар?</h3><p>Неверно считают расход по живому сечению.</p></article>
+      <article><span>04</span><h3>Что определяет давление?</h3><p>Пытаются определить его только по избытку воздуха.</p></article>
+      <article><span>05</span><h3>Как распределить вытяжку?</h3><p>Ошибаются с верхней и нижней вытяжкой.</p></article>
+      <article><span>06</span><h3>Когда подключать смежников?</h3><p>Поздно передают мощности смежникам.</p></article>
+      <article><span>07</span><h3>Как увязать системы?</h3><p>Вентиляция, автоматика и технология остаются несогласованными.</p></article>
+      <div class="problem-note">Пособие собрано как <strong>рабочий алгоритм проектировщика</strong>, а не как пересказ нормативов.<span aria-hidden="true">↗</span></div>
+    </div>
+  </div></section>
+  <section id="inside" class="section pale"><div class="container"><div class="section-heading"><div><p class="eyebrow">02 / СОДЕРЖАНИЕ ПОСОБИЯ</p><h2>Весь маршрут<br>в одном пособии</h2></div><p>От исходных данных до увязки систем.<br>Открывайте нужную тему по ходу работы.</p></div>
+    <ol class="topics"><li>Исходные данные</li><li>Классы чистоты</li><li>Ламинарные зоны</li><li>Расчет притока</li><li>Турбулентные помещения</li><li>Вытяжка верх/низ</li><li>Баланс</li><li>Воздуховоды</li><li>Фильтрация</li><li>Увлажнение</li><li>Автоматика</li><li>Энергопотребление</li><li>Пожарный алгоритм</li><li>Типовые ошибки</li><li>Реальные проектные примеры</li></ol>
+  </div></section>
+  <section id="check" class="section check-section"><div class="container"><p class="eyebrow">03 / EXCEL-ИНСТРУМЕНТ</p><div class="check-grid"><div><h2>КЧП CHECK —<br><span>быстрый контроль</span><br>расчета</h2><p class="lead">Excel-инструмент помогает проверить основные параметры помещения до выпуска чертежей.</p><ul class="check-features"><li>Расчет объема помещения</li><li>Расчет ламинарного расхода</li><li>Ввод кратности для турбулентных помещений</li><li>Принятый приток, вытяжка и баланс</li><li>Распределение вытяжки верх/низ</li><li>Количество вытяжных устройств</li><li>Подбор ориентировочного сечения воздуховода</li><li>Контроль скорости и статус проверки</li></ul></div>
+    <figure class="check-window"><div class="window-title"><span class="excel-icon">X</span><strong>КЧП CHECK</strong><span>МАКЕТ</span></div><div class="window-tabs"><span>Расчет помещения</span><span>Проверка</span></div><div class="sheet"><div class="sheet-label">01 / ИСХОДНЫЕ ДАННЫЕ</div><div class="sheet-row"><span>Площадь помещения</span><b>—</b><small>м²</small></div><div class="sheet-row"><span>Высота помещения</span><b>—</b><small>м</small></div><div class="sheet-row"><span>Объем помещения</span><b>—</b><small>м³</small></div><div class="sheet-label">02 / ВОЗДУШНЫЙ БАЛАНС</div><div class="sheet-row"><span>Принятый приток</span><b>—</b><small>м³/ч</small></div><div class="sheet-row"><span>Вытяжка</span><b>—</b><small>м³/ч</small></div><div class="sheet-row total"><span>Баланс</span><b>—</b><small>м³/ч</small></div><div class="sheet-status"><span aria-hidden="true">○</span> Для проверки нужны исходные данные</div></div><figcaption>Условный интерфейс. Поля показаны без расчетных значений.</figcaption></figure></div>
+    <p class="check-note"><span aria-hidden="true">↳</span> CHECK не заменяет проектировщика. <strong>Он помогает не пропустить ошибку.</strong></p>
+  </div></section>
+  <section class="section" aria-labelledby="workflow-title"><div class="container"><p class="eyebrow">04 / ПРАКТИЧЕСКИЙ ПРИМЕР</p><h2 id="workflow-title">От помещения<br>до проектного решения</h2><p class="section-intro">Последовательность работы, которую можно проследить на проектном примере из комплекта.</p><ol class="workflow"><li>Помещение</li><li>Тип воздухообмена</li><li>Расчет расхода</li><li>Приток</li><li>Вытяжка</li><li>Баланс</li><li>Воздуховоды</li><li>Автоматика</li><li>Задание смежникам</li><li>Чертеж</li></ol></div></section>
+  <section class="section pale" aria-labelledby="kit-title"><div class="container kit"><div><p class="eyebrow">05 / СОСТАВ КОМПЛЕКТА</p><h2 id="kit-title">Материалы,<br>которые работают<br>вместе</h2><p>Материалы ориентированы на проектирование медицинских чистых помещений.</p></div><ul class="kit-list"><li><span>PDF</span><div><h3>Практическое пособие</h3><p>Понятная последовательность проектирования.</p></div></li><li><span>XLSX</span><div><h3>Excel КЧП CHECK</h3><p>Контроль основных параметров расчета.</p></div></li><li><span>ПРИМЕР</span><div><h3>Рабочее проектное решение</h3><p>Переход от расчета к оформлению.</p></div></li><li><span>СПИСОК</span><div><h3>Чек-лист проектировщика</h3><p>Ключевые вопросы перед выпуском.</p></div></li><li><span>РАСЧЕТ</span><div><h3>Таблицы и расчетные примеры</h3><p>Материалы для разбора инженерных задач.</p></div></li></ul></div></section>
+  <section class="section" aria-labelledby="audience-title"><div class="container"><p class="eyebrow">06 / ДЛЯ КОГО</p><h2 id="audience-title">На разных этапах практики</h2><div class="audience-grid"><article><h3>Начинающему проектировщику</h3><p>Чтобы выстроить понятную последовательность работы.</p></article><article><h3>Инженеру ОВиК</h3><p>Чтобы держать расчет и увязку систем под контролем.</p></article><article><h3>Фрилансеру</h3><p>Чтобы организовать самостоятельную проверку решения.</p></article><article><h3>Впервые на медобъекте</h3><p>Чтобы разобраться в задачах чистых помещений.</p></article><article><h3>ГИПу / проверяющему</h3><p>Для экспресс-контроля основных параметров.</p></article><article><h3>Инженеру, который хочет меньше переделок</h3><p>Чтобы замечать пропуски до выпуска документации.</p></article></div>
+    <aside class="honest"><h3>Что это не такое</h3><div><ul><li>Не нормативная база.</li><li>Не замена СП, ГОСТ и заданию технолога.</li><li>Не автоматическое проектирование.</li><li>Не гарантия прохождения экспертизы.</li></ul><p>Это практический инструмент, который помогает быстрее принять обоснованное проектное решение.</p></div></aside>
+  </div></section>
+  <section id="author" class="section pale"><div class="container author"><div class="author-monogram" role="img" aria-label="Инициалы автора Ришата Зарипова">РЗ<span>ОВиК / ВК</span></div><div><p class="eyebrow">07 / АВТОР</p><h2>Автор — практикующий<br>инженер-проектировщик</h2><h3>Ришат Зарипов</h3><p>Инженер-проектировщик ОВиК/ВК. Работаю с медицинскими объектами, вентиляцией чистых помещений, расчетами, замечаниями экспертизы и техническими решениями.</p></div></div></section>
+  <section id="buy" class="section" aria-labelledby="price-title"><div class="container pricing"><div><p class="eyebrow">08 / ВСЕ ДЛЯ РАБОТЫ</p><h2 id="price-title">Полный комплект</h2><p>Пособие, инструмент проверки и примеры —<br>в одном наборе для проектировщика.</p><ul class="included"><li>Практическое пособие</li><li>Excel КЧП CHECK</li><li>Проектный пример</li><li>Чек-листы</li><li>Обновления текущего выпуска, если они появятся</li></ul></div><div class="price-panel"><span class="price-caption">СТОИМОСТЬ КОМПЛЕКТА</span><p class="price" data-price>2 990 ₽</p><p>PDF + Excel + проектные материалы</p><a class="button" href="#buy" data-payment="yoomoney" data-checkout>Получить комплект <span aria-hidden="true">↗</span></a><p id="payment-note" class="payment-note" role="status" tabindex="-1">Оплата пока не подключена. Возможность покупки появится позже.</p><noscript><p>Покупка пока недоступна.</p></noscript></div></div></section>
+  <section id="faq" class="section pale"><div class="container faq-layout"><div><p class="eyebrow">09 / ВОПРОСЫ И ОТВЕТЫ</p><h2>Перед началом<br>работы</h2></div><div class="faq-list">
+    <details><summary>Что входит в комплект?</summary><p>PDF-пособие, Excel КЧП CHECK, пример рабочего проектного решения, чек-лист проектировщика, таблицы и расчетные примеры.</p></details>
+    <details><summary>Подойдет ли начинающему?</summary><p>Пособие помогает выстроить алгоритм работы. Для применения расчетов нужны базовые знания вентиляции и понимание исходных данных конкретного объекта.</p></details>
+    <details><summary>Нужен ли AutoCAD?</summary><p>Для чтения PDF и работы с Excel-инструментом AutoCAD не нужен. Требования к программе для редактирования проектного примера будут уточнены вместе с форматом файлов до начала продаж.</p></details>
+    <details><summary>Работает ли CHECK без макросов?</summary><p>Требования к макросам и совместимым версиям Excel будут указаны для готового выпуска до начала продаж. На этой странице представлен только макет интерфейса.</p></details>
+    <details><summary>Это нормативный документ?</summary><p>Нет. Это практическое пособие. Решения необходимо сверять с применимыми нормативными требованиями и заданием технолога.</p></details>
+    <details><summary>Можно ли использовать материалы в рабочих проектах?</summary><p>Материалы предназначены для поддержки проектной работы. Примеры нужно адаптировать к исходным данным объекта и проверить. Условия использования файлов будут опубликованы до начала продаж.</p></details>
+    <details><summary>Будут ли обновления?</summary><p>В комплект включены обновления текущего выпуска, если они появятся. Периодичность и выпуск новых версий не обещаются.</p></details>
+    <details><summary>Как я получу файлы после оплаты?</summary><p>Оплата пока не подключена. Порядок и сроки получения файлов будут указаны до начала продаж и до совершения платежа.</p></details>
+  </div></div></section>
+  <section class="final-cta"><div class="container"><p class="eyebrow">ОТ РАСЧЕТА — К УВЕРЕННОМУ РЕШЕНИЮ</p><h2>Проектируйте чистые помещения<br>по понятному алгоритму</h2><a class="button" href="#buy" data-payment="yoomoney">Получить комплект за <span data-price>2 990 ₽</span> <span aria-hidden="true">↗</span></a></div></section>
+</main>
+<footer><div class="container footer-row"><a class="brand" href="#home"><span class="brand-mark" aria-hidden="true">≋</span> КЧП</a><span>© 2026 Ришат Зарипов</span><a href="https://github.com/zrishat000/kchp-landing">Проект на GitHub ↗</a></div></footer>
+</body>
+</html>
