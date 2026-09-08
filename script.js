@@ -36,6 +36,7 @@ if (menuButton && navigation) {
       } catch {
         return;
       }
+
       const destination = document.getElementById(id);
       if (destination) {
         destination.setAttribute('tabindex', '-1');
@@ -57,11 +58,9 @@ if (menuButton && navigation) {
   desktop.addEventListener('change', () => closeMenu());
 }
 
-/* Final visual overrides.
-   Kept in JS so the existing styles.css does not need to be replaced. */
+/* Final visual overrides */
 const finalStyle = document.createElement('style');
 finalStyle.textContent = `
-  /* Hero: real product assets */
   .mini-check.has-image {
     height: 176px !important;
     padding: 0 !important;
@@ -89,7 +88,6 @@ finalStyle.textContent = `
     object-position: center !important;
   }
 
-  /* Main CHECK must remain readable and complete */
   .check-window.has-image > img {
     width: 100% !important;
     height: auto !important;
@@ -98,7 +96,6 @@ finalStyle.textContent = `
     object-position: top center !important;
   }
 
-  /* Real booklet previews */
   .preview-media.has-image > img {
     width: 100% !important;
     height: 100% !important;
@@ -106,7 +103,6 @@ finalStyle.textContent = `
     object-position: center top !important;
   }
 
-  /* Author */
   .author-photo {
     width: 100%;
     max-width: 360px;
@@ -138,13 +134,13 @@ finalStyle.textContent = `
 `;
 document.head.appendChild(finalStyle);
 
-/* Update small bits of stale v2 copy once real files are present. */
+/* Keep Hero terminology consistent */
 const formats = document.querySelector('.hero .formats');
 if (formats) {
   formats.textContent = 'PDF + КЧП CHECK (.XLSM) + проектные примеры';
 }
 
-/* Checkout remains a safe placeholder until payment is connected. */
+/* Checkout placeholder */
 const checkoutButton = document.querySelector('[data-checkout]');
 if (checkoutButton) {
   checkoutButton.addEventListener('click', (event) => {
@@ -159,7 +155,7 @@ if (checkoutButton) {
   });
 }
 
-/* Real assets progressively replace fallbacks. */
+/* Real assets progressively replace fallbacks */
 const mediaSlots = [...document.querySelectorAll('[data-media]')];
 
 function refreshStaleCaptions() {
@@ -226,15 +222,18 @@ document.querySelectorAll('img').forEach((img) => {
   }
 });
 
-/* Author photo.
-   If assets/author.webp is unavailable, existing initials remain. */
+/*
+  AUTHOR PHOTO HOTFIX
+  Important: do NOT set loading="lazy" on a detached Image object.
+  In some browsers that prevents the request from starting, so `load`
+  never fires and the "РЗ" fallback remains forever.
+*/
 const authorFallback = document.querySelector('#author .author-monogram');
 
 if (authorFallback) {
   const authorImage = new Image();
-  authorImage.src = 'assets/author.webp';
+
   authorImage.alt = 'Ришат Зарипов — инженер-проектировщик ОВиК/ВК';
-  authorImage.loading = 'lazy';
   authorImage.decoding = 'async';
   authorImage.width = 800;
   authorImage.height = 1000;
@@ -245,6 +244,13 @@ if (authorFallback) {
     frame.appendChild(authorImage);
     authorFallback.replaceWith(frame);
   });
+
+  authorImage.addEventListener('error', () => {
+    console.warn('Не удалось загрузить assets/author.webp');
+  });
+
+  /* Set src LAST so the request starts after listeners are attached. */
+  authorImage.src = 'assets/author.webp';
 }
 
 /* Lightbox */
