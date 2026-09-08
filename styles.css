@@ -110,7 +110,6 @@
  .workflow li:nth-child(5):after{content:'↓';top:auto;bottom:-18px;right:20px}
  .honest{grid-template-columns:1fr 1.1fr}
 }
-
 .nav-buy {
     background: #2466dc;
     color: #fff !important;
@@ -120,14 +119,12 @@
     font-weight: 600;
     transition: background .18s, transform .18s, box-shadow .18s;
 }
-
 .nav-buy:hover {
     background: #1958c5;
     color: #fff !important;
     transform: translateY(-1px);
     box-shadow: 0 6px 16px rgba(36, 102, 220, .22);
 }
-
 .nav-buy:focus-visible {
     outline: 3px solid #82b4ff;
     outline-offset: 3px;
