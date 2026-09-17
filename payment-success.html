@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
 
     <title>Оплата прошла успешно — Вентиляция чистых помещений</title>
 
@@ -26,7 +27,7 @@
         .card {
             width: 100%;
             max-width: 620px;
-            background: #ffffff;
+            background: #fff;
             border-radius: 20px;
             padding: 45px 35px;
             text-align: center;
@@ -39,12 +40,16 @@
             margin: 0 auto 25px;
             border-radius: 50%;
             background: #22c55e;
-            color: #ffffff;
+            color: #fff;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 42px;
             font-weight: bold;
+        }
+
+        .error-icon {
+            background: #ef4444;
         }
 
         h1 {
@@ -91,11 +96,11 @@
         }
 
         .download-button {
-            display: inline-block;
+            display: none;
             width: 100%;
             padding: 17px 25px;
             background: #111827;
-            color: #ffffff;
+            color: #fff;
             text-decoration: none;
             border-radius: 12px;
             font-size: 18px;
@@ -109,10 +114,15 @@
         }
 
         .note {
+            display: none;
             margin-top: 18px;
             color: #6b7280;
             font-size: 13px;
             line-height: 1.5;
+        }
+
+        .error {
+            display: none;
         }
 
         .support {
@@ -148,42 +158,58 @@
 
 <div class="card">
 
-    <div class="success-icon">✓</div>
+    <div id="successBlock">
 
-    <h1>Оплата прошла успешно!</h1>
+        <div class="success-icon">✓</div>
 
-    <p class="subtitle">
-        Спасибо за покупку. Ваш практический комплект готов к скачиванию.
-    </p>
+        <h1>Оплата прошла успешно!</h1>
 
-    <div class="product">
-        <div class="product-title">
-            «Вентиляция чистых помещений»
+        <p class="subtitle">
+            Спасибо за покупку. Ваш практический комплект готов к скачиванию.
+        </p>
+
+        <div class="product">
+            <div class="product-title">
+                «Вентиляция чистых помещений»
+            </div>
+
+            <div class="product-description">
+                Практический комплект для инженеров-проектировщиков ОВиК:
+                материалы, примеры и инструменты для работы с проектами.
+            </div>
         </div>
 
-        <div class="product-description">
-            Практический комплект для инженеров-проектировщиков ОВиК:
-            материалы, примеры и инструменты для работы с проектами.
+        <div class="order">
+            Номер заказа:
+            <strong id="orderId">определяется...</strong>
         </div>
+
+        <a
+            id="downloadBtn"
+            class="download-button"
+            target="_blank"
+            rel="noopener noreferrer"
+        >
+            📥 Скачать комплект
+        </a>
+
+        <div id="downloadNote" class="note">
+            После нажатия откроется страница скачивания на Яндекс Диске.
+        </div>
+
     </div>
 
-    <div class="order">
-        Номер заказа:
-        <strong id="orderId">определяется...</strong>
-    </div>
+    <div id="errorBlock" class="error">
 
-    <a
-        class="download-button"
-        href="https://disk.yandex.ru/d/cAroEpZQibxi6A"
-        target="_blank"
-        rel="noopener noreferrer"
-    >
-        📥 Скачать комплект
-    </a>
+        <div class="success-icon error-icon">!</div>
 
-    <div class="note">
-        Нажмите кнопку выше, чтобы открыть страницу скачивания
-        на Яндекс Диске.
+        <h1>Страница недоступна</h1>
+
+        <p class="subtitle">
+            Для доступа к материалам необходимо перейти на эту страницу
+            после успешной оплаты.
+        </p>
+
     </div>
 
     <div class="support">
@@ -197,16 +223,65 @@
 </div>
 
 <script>
+    /*
+     * Минимальная защита без сервера.
+     *
+     * ВАЖНО:
+     * Это НЕ проверяет факт оплаты на стороне Robokassa.
+     * Это только скрывает кнопку, если отсутствует InvId.
+     */
+
     const params = new URLSearchParams(window.location.search);
 
-    const invId =
-        params.get('InvId') ||
-        params.get('InvID') ||
-        params.get('invoice') ||
-        params.get('invoiceId');
+    const invId = params.get('InvId');
 
-    document.getElementById('orderId').textContent =
-        invId || 'не указан';
+    const successBlock = document.getElementById('successBlock');
+    const errorBlock = document.getElementById('errorBlock');
+    const orderId = document.getElementById('orderId');
+    const downloadBtn = document.getElementById('downloadBtn');
+    const downloadNote = document.getElementById('downloadNote');
+
+    /*
+     * Проверяем, что InvId существует
+     * и состоит только из цифр.
+     */
+    const validInvId = invId && /^\d+$/.test(invId);
+
+    if (validInvId) {
+
+        orderId.textContent = invId;
+
+        /*
+         * Ссылка на Яндекс.Диск разбита на две части
+         * и закодирована Base64.
+         *
+         * Это НЕ является настоящей защитой,
+         * но ссылка не лежит открытым текстом
+         * в HTML-разметке.
+         */
+
+        const part1 = 'aHR0cHM6Ly9kaXNrLnlhbmRleC5ydS9kLw==';
+        const part2 = 'Y0Fyb0VwWlFpYnhpNkE=';
+
+        const downloadUrl =
+            atob(part1) +
+            atob(part2);
+
+        downloadBtn.href = downloadUrl;
+        downloadBtn.style.display = 'inline-block';
+        downloadNote.style.display = 'block';
+
+    } else {
+
+        /*
+         * InvId отсутствует или имеет неправильный формат.
+         * Показываем сообщение об ограниченном доступе.
+         */
+
+        successBlock.style.display = 'none';
+        errorBlock.style.display = 'block';
+
+    }
 </script>
 
 </body>
