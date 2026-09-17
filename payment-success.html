@@ -125,6 +125,10 @@
             display: none;
         }
 
+        #successBlock {
+            display: none;
+        }
+
         .support {
             margin-top: 30px;
             padding-top: 22px;
@@ -208,13 +212,16 @@
         <p class="subtitle">
             Для доступа к материалам необходимо перейти на эту страницу
             после успешной оплаты.
+            <br><br>
+            Если вы только что оплатили заказ и видите это сообщение,
+            пожалуйста, напишите нам на почту — мы проверим оплату
+            и предоставим доступ к материалам.
         </p>
 
     </div>
 
     <div class="support">
-        Если возникли проблемы с оплатой или скачиванием,
-        свяжитесь с продавцом:
+        Поддержка:
         <a href="mailto:kchp.project@mail.ru">
             kchp.project@mail.ru
         </a>
@@ -227,8 +234,8 @@
      * Минимальная защита без сервера.
      *
      * ВАЖНО:
-     * Это НЕ проверяет факт оплаты на стороне Robokassa.
-     * Это только скрывает кнопку, если отсутствует InvId.
+     * Эта проверка НЕ подтверждает факт оплаты через Robokassa.
+     * Она только требует наличия корректного InvId.
      */
 
     const params = new URLSearchParams(window.location.search);
@@ -242,12 +249,19 @@
     const downloadNote = document.getElementById('downloadNote');
 
     /*
-     * Проверяем, что InvId существует
-     * и состоит только из цифр.
+     * Явно приводим результат к Boolean.
      */
-    const validInvId = invId && /^\d+$/.test(invId);
+    const validInvId =
+        Boolean(invId) &&
+        /^\d+$/.test(invId);
 
     if (validInvId) {
+
+        /*
+         * Показываем успешный блок только после
+         * успешной проверки InvId.
+         */
+        successBlock.style.display = 'block';
 
         orderId.textContent = invId;
 
@@ -255,27 +269,51 @@
          * Ссылка на Яндекс.Диск разбита на две части
          * и закодирована Base64.
          *
-         * Это НЕ является настоящей защитой,
-         * но ссылка не лежит открытым текстом
-         * в HTML-разметке.
+         * Это НЕ является полноценной защитой.
+         * Это лишь убирает ссылку из открытого HTML-кода.
          */
 
         const part1 = 'aHR0cHM6Ly9kaXNrLnlhbmRleC5ydS9kLw==';
         const part2 = 'Y0Fyb0VwWlFpYnhpNkE=';
 
-        const downloadUrl =
-            atob(part1) +
-            atob(part2);
+        try {
 
-        downloadBtn.href = downloadUrl;
-        downloadBtn.style.display = 'inline-block';
-        downloadNote.style.display = 'block';
+            const downloadUrl =
+                atob(part1) +
+                atob(part2);
+
+            /*
+             * Дополнительная проверка,
+             * что получилась ожидаемая ссылка.
+             */
+            if (!downloadUrl.startsWith('https://disk.yandex.ru/d/')) {
+                throw new Error('Некорректный адрес скачивания');
+            }
+
+            downloadBtn.href = downloadUrl;
+            downloadBtn.style.display = 'inline-block';
+            downloadNote.style.display = 'block';
+
+        } catch (error) {
+
+            /*
+             * Если Base64 повреждён или ссылка сформирована
+             * некорректно — не показываем кнопку скачивания.
+             */
+
+            successBlock.style.display = 'none';
+            errorBlock.style.display = 'block';
+
+            console.error(
+                'Ошибка формирования ссылки на скачивание:',
+                error
+            );
+        }
 
     } else {
 
         /*
          * InvId отсутствует или имеет неправильный формат.
-         * Показываем сообщение об ограниченном доступе.
          */
 
         successBlock.style.display = 'none';
