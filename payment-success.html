@@ -1,50 +1,213 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ru">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Спасибо за покупку — КЧП</title>
-<style>
-:root{--ink:#101e32;--blue:#2466dc;--pale:#f2f6fb;--line:#d7e0eb;--muted:#5f6f84}
-*{box-sizing:border-box}
-body{margin:0;font-family:Arial,Helvetica,sans-serif;color:var(--ink);background:#fff;line-height:1.62}
-.header{border-bottom:1px solid var(--line);background:#fff}
-.wrap{max-width:980px;margin:0 auto;padding:0 28px}
-.header .wrap{display:flex;align-items:center;justify-content:space-between;min-height:76px}
-.brand{font-size:28px;font-weight:700;text-decoration:none;color:var(--ink)}
-.back{color:var(--blue);text-decoration:none;font-weight:600}
-main{padding:56px 0 80px}
-.eyebrow{font-size:12px;letter-spacing:.14em;color:var(--blue);font-weight:700;text-transform:uppercase}
-h1{font-size:44px;line-height:1.08;margin:10px 0 18px}
-h2{font-size:24px;margin-top:38px}
-p,li{font-size:16px}
-.lead{font-size:19px;color:var(--muted);max-width:780px}
-.box{background:var(--pale);border:1px solid var(--line);padding:22px 24px;border-radius:8px;margin:26px 0}
-footer{border-top:1px solid var(--line);background:#fafcff;padding:28px 0;color:var(--muted);font-size:14px}
-footer a{margin-right:18px}
-a{color:var(--blue)}
-@media(max-width:640px){.wrap{padding:0 18px}h1{font-size:34px}.header .wrap{min-height:66px}}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Оплата прошла успешно — Вентиляция чистых помещений</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f5f7fa;
+            color: #1f2937;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .card {
+            width: 100%;
+            max-width: 620px;
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 45px 35px;
+            text-align: center;
+            box-shadow: 0 10px 35px rgba(0, 0, 0, 0.08);
+        }
+
+        .success-icon {
+            width: 76px;
+            height: 76px;
+            margin: 0 auto 25px;
+            border-radius: 50%;
+            background: #22c55e;
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 42px;
+            font-weight: bold;
+        }
+
+        h1 {
+            margin: 0 0 15px;
+            font-size: 30px;
+            line-height: 1.2;
+        }
+
+        .subtitle {
+            margin: 0 auto 30px;
+            max-width: 500px;
+            color: #6b7280;
+            font-size: 17px;
+            line-height: 1.6;
+        }
+
+        .product {
+            background: #f3f4f6;
+            border-radius: 14px;
+            padding: 20px;
+            margin-bottom: 25px;
+        }
+
+        .product-title {
+            font-size: 19px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .product-description {
+            color: #6b7280;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .order {
+            margin-bottom: 25px;
+            color: #6b7280;
+            font-size: 14px;
+        }
+
+        .order strong {
+            color: #1f2937;
+        }
+
+        .download-button {
+            display: inline-block;
+            width: 100%;
+            padding: 17px 25px;
+            background: #111827;
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 12px;
+            font-size: 18px;
+            font-weight: 700;
+            transition: transform 0.15s ease, opacity 0.15s ease;
+        }
+
+        .download-button:hover {
+            opacity: 0.9;
+            transform: translateY(-1px);
+        }
+
+        .note {
+            margin-top: 18px;
+            color: #6b7280;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+        .support {
+            margin-top: 30px;
+            padding-top: 22px;
+            border-top: 1px solid #e5e7eb;
+            color: #6b7280;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+        .support a {
+            color: #2563eb;
+        }
+
+        @media (max-width: 480px) {
+            .card {
+                padding: 35px 22px;
+            }
+
+            h1 {
+                font-size: 25px;
+            }
+
+            .subtitle {
+                font-size: 16px;
+            }
+        }
+    </style>
 </head>
+
 <body>
-<header class="header"><div class="wrap">
-<a class="brand" href="https://zrishat000.github.io/kchp-landing/">≋ КЧП</a>
-<a class="back" href="https://zrishat000.github.io/kchp-landing/">← На сайт</a>
-</div></header>
-<main><div class="wrap">
-<p class="eyebrow">Оплата</p>
-<h1>Спасибо за покупку</h1>
-<p class="lead">Что происходит после успешной оплаты.</p>
 
-<div class="box"><h2 style="margin-top:0">Оплата прошла успешно</h2><p>Спасибо за покупку практического комплекта КЧП.</p></div>
-<p>Материалы должны быть отправлены автоматически на адрес электронной почты, указанный при оплате.</p>
-<p><strong>Проверьте входящие письма, а также папки «Спам» и «Рассылки».</strong></p>
-<p>Если материалы не пришли в течение 30 минут, напишите на <a href="mailto:kchp.project@mail.ru">kchp.project@mail.ru</a>, указав дату, сумму платежа и e-mail, который использовали при оплате.</p>
+<div class="card">
 
-</div></main>
-<footer><div class="wrap">
-<p><strong>Самозанятый Зарипов Ришат Рауисович</strong><br>ИНН 025704145438 · г. Уфа · <a href="mailto:kchp.project@mail.ru">kchp.project@mail.ru</a></p>
-<p><a href="offer.html">Публичная оферта</a><a href="privacy.html">Персональные данные</a><a href="delivery.html">Получение и возврат</a></p>
-</div></footer>
+    <div class="success-icon">✓</div>
+
+    <h1>Оплата прошла успешно!</h1>
+
+    <p class="subtitle">
+        Спасибо за покупку. Ваш практический комплект готов к скачиванию.
+    </p>
+
+    <div class="product">
+        <div class="product-title">
+            «Вентиляция чистых помещений»
+        </div>
+
+        <div class="product-description">
+            Практический комплект для инженеров-проектировщиков ОВиК:
+            материалы, примеры и инструменты для работы с проектами.
+        </div>
+    </div>
+
+    <div class="order">
+        Номер заказа:
+        <strong id="orderId">определяется...</strong>
+    </div>
+
+    <a
+        class="download-button"
+        href="https://disk.yandex.ru/d/cAroEpZQibxi6A"
+        target="_blank"
+        rel="noopener noreferrer"
+    >
+        📥 Скачать комплект
+    </a>
+
+    <div class="note">
+        Нажмите кнопку выше, чтобы открыть страницу скачивания
+        на Яндекс Диске.
+    </div>
+
+    <div class="support">
+        Если возникли проблемы с оплатой или скачиванием,
+        свяжитесь с продавцом:
+        <a href="mailto:kchp.project@mail.ru">
+            kchp.project@mail.ru
+        </a>
+    </div>
+
+</div>
+
+<script>
+    const params = new URLSearchParams(window.location.search);
+
+    const invId =
+        params.get('InvId') ||
+        params.get('InvID') ||
+        params.get('invoice') ||
+        params.get('invoiceId');
+
+    document.getElementById('orderId').textContent =
+        invId || 'не указан';
+</script>
+
 </body>
 </html>
